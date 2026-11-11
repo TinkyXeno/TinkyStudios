@@ -1,169 +1,688 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tinky Studios</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: #080808;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 8%;
-            background: rgba(8, 8, 8, 0.85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid #222;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: -1px;
-        }
-
-        nav a {
-            color: #aaa;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        section {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 100px 20px;
-        }
-
-        #home {
-            background: radial-gradient(
-                ellipse at center,
-                #202020,
-                #080808 70%
-            );
-        }
-
-        #about {
-            background: #101010;
-            border-top: 1px solid #222;
-        }
-
-        h1 {
-            font-size: clamp(70px, 15vw, 180px);
-            font-weight: 900;
-            letter-spacing: -6px;
-            animation: fadeIn 1.5s ease;
-        }
-
-        .scroll {
-            position: absolute;
-            bottom: 35px;
-            color: #888;
-            text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 3px;
-            animation: bounce 2s infinite;
-        }
-
-        footer {
-            padding: 30px;
-            text-align: center;
-            color: #666;
-            border-top: 1px solid #222;
-            font-size: 13px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(8px);
-            }
-        }
-
-        @media (max-width: 500px) {
-            nav {
-                padding: 20px;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            nav a {
-                margin-left: 15px;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tinky Studios · Fortnite Shop</title>
+<meta name="theme-color" content="#08090d">
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;color:#f5f5fb;background:radial-gradient(ellipse 80% 35% at 55% -5%,#39324b 0%,transparent 75%),linear-gradient(155deg,#0d0d14,#060609 60%,#10101a);min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:#cbbcff}
+header{position:sticky;top:0;z-index:20;background:#0c0c12c9;backdrop-filter:blur(22px);border-bottom:1px solid #ffffff20}
+.nav{max-width:1450px;margin:auto;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:900;letter-spacing:.1em;font-size:14px}
+.brand span{color:#b5a2ff}
+.glass{background:linear-gradient(135deg,#ffffff19,#ffffff08);border:1px solid #ffffff2a;box-shadow:inset 0 1px #ffffff20,0 12px 40px #0004;backdrop-filter:blur(16px);border-radius:18px}
+.pill{border:1px solid #ffffff35;border-radius:999px;background:linear-gradient(125deg,#ffffff24,#ffffff09);color:white;padding:11px 17px;box-shadow:inset 0 1px #ffffff30}
+.pill:hover{background:#ffffff30}
+.wrap{max-width:1450px;margin:auto;padding:34px 24px 80px}
+.eyebrow{color:#c8b8ff;letter-spacing:.18em;font-size:12px;font-weight:800}
+h1{font-size:clamp(40px,7vw,82px);letter-spacing:-.06em;margin:10px 0 6px;line-height:1}
+h2{font-size:25px;letter-spacing:-.04em}
+p{color:#b6b5c2}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap}
+.timer{padding:18px 22px;min-width:230px}
+.timer strong{font-size:31px;font-variant-numeric:tabular-nums;display:block;margin:6px 0}
+.muted{font-size:12px;color:#a7a5b6}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 18px}
+.tools input,.tools select{background:#ffffff10;color:white;border:1px solid #ffffff30;border-radius:13px;padding:13px;min-height:46px}
+.tools input{flex:1;min-width:220px}
+.tools option{background:#15151e}
+.status{padding:18px 20px;margin:12px 0 22px;color:#c7c5d1}
+.status.error{border-color:#ff808066;color:#ffd3d3}
+.section-title{display:flex;align-items:center;gap:12px;margin:32px 0 15px}
+.section-title small{color:#b4b0c2}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px}
+.item{overflow:hidden;position:relative;transition:transform .2s,border-color .2s}
+.item:hover{transform:translateY(-4px);border-color:#d7c5ff77}
+.item img{width:100%;aspect-ratio:1;object-fit:cover;background:#242330;display:block}
+.item .body{padding:13px}
+.item .name{font-weight:750;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.item .type{color:#aaa7ba;font-size:12px;margin-top:4px}
+.price{font-weight:800;margin:12px 0}
+.expiry-banner{padding:10px 9px;text-align:center;background:linear-gradient(115deg,#2c2337,#17151f);border-bottom:1px solid #ffffff30;font-size:11px;font-weight:850;letter-spacing:.02em;color:#f1e7ff;font-variant-numeric:tabular-nums;min-height:35px}
+.expiry-banner.soon{background:linear-gradient(115deg,#8d253b,#4d1c32);color:#fff}
+.expiry-banner.unknown{color:#a7a5b6;background:#15151c}
+.mini{display:flex;gap:7px}
+.mini button{flex:1;padding:10px 5px;border-radius:12px;border:1px solid #ffffff33;background:#ffffff14;color:white}
+.mini button:hover{background:#ffffff2a}
+.drawer{position:fixed;inset:0;background:#000a;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(9px)}
+.drawer.open{display:flex}
+.panel{background:linear-gradient(145deg,#252432,#0d0d14);border:1px solid #ffffff38;border-radius:24px;max-height:92vh;overflow:auto;width:min(620px,100%);padding:24px;box-shadow:0 30px 100px #000a}
+.panel img{width:100%;max-height:280px;object-fit:contain;background:#ffffff08;border-radius:16px}
+.panel video{width:100%;max-height:340px;background:#000;border-radius:14px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.close{background:#ffffff20;color:white;border:1px solid #ffffff30;border-radius:12px;padding:9px 13px}
+.cart{position:fixed;inset:0 0 0 auto;width:min(430px,100%);background:#12121bea;backdrop-filter:blur(25px);z-index:55;border-left:1px solid #ffffff33;box-shadow:-15px 0 60px #0008;padding:25px;overflow:auto;display:none}
+.cart.open{display:block}
+.cart-entry{padding:13px 0;border-bottom:1px solid #ffffff25;display:flex;gap:10px;justify-content:space-between}
+.total{font-size:26px;font-weight:850}
+.attribution{margin-top:55px;color:#a5a2b4;font-size:13px}
+.hidden{display:none!important}
+@media(max-width:560px){
+.nav{padding:14px}
+.wrap{padding:22px 14px 60px}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item .body{padding:10px}
+.timer{width:100%}
+.brand{font-size:12px}
+}
+</style>
 </head>
-
 <body>
+<header>
+  <div class="nav">
+    <div class="brand">TINKY <span>STUDIOS</span> <span style="color:#888">/ SHOP</span></div>
+    <button class="pill" id="cartButton">🛒 Cart <span id="cartCount">0</span></button>
+  </div>
+</header>
 
-    <nav>
-        <div class="logo">Tinky Studios</div>
+<main class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow">FORTNITE · LIVE SHOP TRACKER</div>
+      <h1>THE ITEM SHOP<span style="color:#bba9ff">.</span></h1>
+      <p>Shop cosmetics, check departure times, preview available emotes and plan your V-Bucks.</p>
+    </div>
+    <div class="glass timer">
+      <span class="muted">NEXT SHOP RESET · 00:00 UTC</span>
+      <strong id="reset">--:--:--</strong>
+      <span class="muted">Countdown to next reset</span>
+    </div>
+  </div>
 
-        <div>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
+  <div class="tools">
+    <input id="search" placeholder="Search skins, emotes, bundles…" aria-label="Search items">
+    <select id="filter" aria-label="Filter items">
+      <option value="all">All items</option>
+      <option value="emote">Emotes</option>
+      <option value="outfit">Outfits</option>
+      <option value="bundle">Bundles</option>
+      <option value="other">Other</option>
+    </select>
+    <select id="sort" aria-label="Sort items">
+      <option value="default">Shop order</option>
+      <option value="priceUp">Price: low to high</option>
+      <option value="priceDown">Price: high to low</option>
+      <option value="leaving">Leaving soonest</option>
+    </select>
+    <button class="pill" id="refresh">↻ Refresh</button>
+  </div>
+
+  <div class="glass status" id="status">Loading today's shop…</div>
+  <div id="results"></div>
+
+  <p class="attribution">
+    <a href="https://itemshop.gg/fortnite/api" target="_blank" rel="noopener">Data from itemshop.gg</a>
+    · Independent fan-made tracker, not affiliated with Epic Games.
+    Dates and pricing are estimates; check Fortnite before purchasing.
+  </p>
+</main>
+
+<div class="drawer" id="modal" role="dialog" aria-modal="true" aria-label="Cosmetic details">
+  <div class="panel">
+    <div class="row">
+      <h2 id="modalTitle">Item</h2>
+      <button class="close" id="modalClose">✕ Close</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<aside class="cart" id="cart" aria-label="Shopping cart">
+  <div class="row">
+    <h2>Your cart</h2>
+    <button class="close" id="cartClose">✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <div style="margin-top:24px" class="glass" id="cartSummary"></div>
+  <p class="muted">Estimated GBP pack cost. Pack sizes and prices can change. This is a wishlist, not a checkout.</p>
+  <button class="pill" id="clearCart">Clear cart</button>
+</aside>
+
+<script>
+'use strict';
+
+const API = 'https://itemshop.gg/api/v1/shop/fortnite';
+const $ = id => document.getElementById(id);
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
+  '&':'&amp;', '<':'&lt;', '>':'&gt;',
+  '"':'&quot;', "'":'&#39;'
+}[c]));
+
+let items = [];
+let shopReset = null;
+let cart = [];
+
+try {
+  cart = JSON.parse(localStorage.getItem('tinkyCartV8') || '[]');
+} catch {
+  cart = [];
+}
+
+const format = n => Number(n || 0).toLocaleString('en-GB');
+
+const date = s =>
+  s && Number.isFinite(new Date(s).getTime())
+    ? new Date(s)
+    : null;
+
+const time = d => {
+  let s = Math.max(0, Math.floor((new Date(d).getTime() - Date.now()) / 1000));
+  return [
+    Math.floor(s / 3600),
+    Math.floor(s % 3600 / 60),
+    s % 60
+  ].map(x => String(x).padStart(2, '0')).join(':');
+};
+
+const iso = d => d
+  ? d.toLocaleString('en-GB', {
+      timeZone:'UTC',
+      day:'numeric',
+      month:'short',
+      year:'numeric',
+      hour:'2-digit',
+      minute:'2-digit'
+    }) + ' UTC'
+  : 'Not provided';
+
+const nextMidnight = () => {
+  const n = new Date();
+  return new Date(Date.UTC(
+    n.getUTCFullYear(),
+    n.getUTCMonth(),
+    n.getUTCDate() + 1
+  ));
+};
+
+const getExpiry = i =>
+  date(i.availability?.until || i.endsAt || i.sectionEndsAt);
+
+const leaving = i => {
+  const e = getExpiry(i);
+  return !!e &&
+    e.getTime() > Date.now() &&
+    e.getTime() <= nextMidnight().getTime() + 60000;
+};
+
+const expiryLabel = d => {
+  if (!d) return 'LEAVE TIME NOT AVAILABLE';
+  if (d.getTime() <= Date.now()) return 'EXPIRY PASSED · REFRESH SHOP';
+
+  return d.getTime() <= nextMidnight().getTime() + 60000
+    ? 'LEAVING TONIGHT · ' + time(d)
+    : 'LEAVES IN ' + time(d);
+};
+
+const img = i => i.images?.card || i.images?.render || '';
+const type = i => String(i.type || 'Cosmetic');
+const cost = i => Number(i.price?.amount ?? 0);
+
+function tick() {
+  let reset = date(shopReset);
+  if (!reset || reset <= Date.now()) reset = nextMidnight();
+
+  $('reset').textContent = time(reset);
+
+  document.querySelectorAll('[data-expiry]').forEach(el => {
+    el.textContent = expiryLabel(date(el.dataset.expiry));
+  });
+}
+
+setInterval(tick, 1000);
+tick();
+
+function normalize(raw) {
+  const sections = raw?.data?.sections;
+
+  if (!Array.isArray(sections)) {
+    throw Error('The API returned an unexpected format.');
+  }
+
+  shopReset = raw.data.expiresAt;
+
+  const out = [];
+
+  sections.forEach((section, si) => {
+    (section.items || []).forEach((item, j) => {
+      out.push({
+        ...item,
+        _section: section.title || 'Other',
+        _index: si * 10000 + j,
+        sectionEndsAt: section.endsAt
+      });
+    });
+  });
+
+  return out;
+}
+
+async function load() {
+  const status = $('status');
+  status.classList.remove('hidden', 'error');
+  status.textContent = 'Loading today’s item shop…';
+  $('results').innerHTML = '';
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 14000);
+
+  try {
+    const res = await fetch(API, {
+      signal: ctrl.signal,
+      cache: 'no-store'
+    });
+
+    if (!res.ok) throw Error('Shop API returned ' + res.status);
+
+    const raw = await res.json();
+    items = normalize(raw);
+
+    if (!items.length) throw Error('The shop returned no items.');
+
+    status.textContent =
+      `${items.length} items loaded · Updated ${iso(date(raw.data.updatedAt))}` +
+      (raw.data.stale ? ' · Data marked stale' : '');
+
+    render();
+  } catch (e) {
+    status.classList.add('error');
+    status.innerHTML =
+      `Could not load live shop: ${esc(
+        e.name === 'AbortError' ? 'Request timed out' : e.message
+      )}. The provider may block browser requests from GitHub Pages. ` +
+      `<a href="https://itemshop.gg/fortnite" target="_blank" rel="noopener">View shop on itemshop.gg</a>. ` +
+      `A server-side proxy may be needed.`;
+  } finally {
+    clearTimeout(timer);
+    tick();
+  }
+}
+
+function render() {
+  const q = $('search').value.toLowerCase().trim();
+  const f = $('filter').value;
+  const sort = $('sort').value;
+
+  let list = items.filter(i => {
+    const t = type(i).toLowerCase();
+    return (i.name || '').toLowerCase().includes(q) &&
+      (f === 'all' ||
+        (f === 'other'
+          ? !['emote', 'outfit', 'bundle'].some(v => t.includes(v))
+          : t.includes(f)));
+  });
+
+  if (sort === 'priceUp') list.sort((a, b) => cost(a) - cost(b));
+  if (sort === 'priceDown') list.sort((a, b) => cost(b) - cost(a));
+
+  if (sort === 'leaving') {
+    list.sort((a, b) =>
+      (getExpiry(a)?.getTime() || Infinity) -
+      (getExpiry(b)?.getTime() || Infinity)
+    );
+  }
+
+  const groups = sort === 'default'
+    ? [...new Set(list.map(i => i._section))]
+    : ['Results'];
+
+  $('results').innerHTML = groups.map(group => {
+    const rows = sort === 'default'
+      ? list.filter(i => i._section === group)
+      : list;
+
+    return `
+      <section>
+        <div class="section-title">
+          <h2>${esc(group)}</h2>
+          <small>${rows.length} items</small>
         </div>
-    </nav>
+        <div class="grid">
+          ${rows.map(i => {
+            const idx = items.indexOf(i);
+            const e = getExpiry(i);
 
-    <section id="home">
-        <h1>Tinky</h1>
+            return `
+              <article class="glass item">
+                <div
+                  class="expiry-banner ${!e ? 'unknown' : leaving(i) ? 'soon' : ''}"
+                  ${e ? `data-expiry="${esc(e.toISOString())}"` : ''}
+                >${expiryLabel(e)}</div>
 
-        <a class="scroll" href="#about">
-            SCROLL ↓
-        </a>
-    </section>
+                <img loading="lazy"
+                  src="${esc(img(i))}"
+                  alt="${esc(i.name)}"
+                  onerror="this.style.opacity='.2'">
 
-    <section id="about">
-        <h1>Tinky</h1>
-    </section>
+                <div class="body">
+                  <div class="name" title="${esc(i.name)}">${esc(i.name)}</div>
+                  <div class="type">${esc(type(i))}</div>
+                  <div class="price">◈ ${format(cost(i))} V-Bucks</div>
+                  <div class="mini">
+                    <button data-view="${idx}">View</button>
+                    <button data-add="${idx}">+ Cart</button>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('')}
+        </div>
+      </section>
+    `;
+  }).join('') || '<p>No matching cosmetics.</p>';
+}
 
-    <footer>
-        © 2026 Tinky Studios
-    </footer>
+$('results').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
 
+  if (b.dataset.view !== undefined) {
+    show(items[Number(b.dataset.view)]);
+  }
+
+  if (b.dataset.add !== undefined) {
+    add(items[Number(b.dataset.add)]);
+  }
+});
+
+['search', 'filter', 'sort'].forEach(id => {
+  $(id).addEventListener(id === 'search' ? 'input' : 'change', render);
+});
+
+$('refresh').onclick = load;
+
+function save() {
+  localStorage.setItem('tinkyCartV8', JSON.stringify(cart));
+  $('cartCount').textContent = cart.length;
+}
+
+function add(i) {
+  if (!i) return;
+
+  const key = i.itemKey || i.id || i.name;
+
+  if (!cart.some(c => c.key === key)) {
+    cart.push({
+      key,
+      name: i.name,
+      price: cost(i)
+    });
+  }
+
+  save();
+  showCart();
+}
+
+const packs = [
+  {v:800, gbp:6.99},
+  {v:2400, gbp:17.49},
+  {v:4500, gbp:27.99},
+  {v:12500, gbp:69.99}
+];
+
+function cheapest(n) {
+  if (!n) return {gbp:0, v:0, packs:[]};
+
+  const cap = n + 12500;
+  const dp = Array(cap + 1).fill(null);
+  dp[0] = {gbp:0, packs:[]};
+
+  for (let v = 0; v <= cap; v++) {
+    if (!dp[v]) continue;
+
+    for (const p of packs) {
+      const dest = v + p.v;
+      if (dest > cap) continue;
+
+      const cand = {
+        gbp: dp[v].gbp + p.gbp,
+        packs: [...dp[v].packs, p.v]
+      };
+
+      if (!dp[dest] || cand.gbp < dp[dest].gbp) {
+        dp[dest] = cand;
+      }
+    }
+  }
+
+  let best = null;
+
+  for (let v = n; v <= cap; v++) {
+    if (dp[v] && (!best || dp[v].gbp < best.gbp)) {
+      best = {...dp[v], v};
+    }
+  }
+
+  return best;
+}
+
+function showCart() {
+  $('cart').classList.add('open');
+
+  $('cartItems').innerHTML = cart.length
+    ? cart.map((i, n) => `
+      <div class="cart-entry">
+        <div>
+          <strong>${esc(i.name)}</strong>
+          <div class="muted">${format(i.price)} V-Bucks</div>
+        </div>
+        <button class="close" data-remove="${n}">Remove</button>
+      </div>
+    `).join('')
+    : '<p>Your cart is empty.</p>';
+
+  const total = cart.reduce((s, i) => s + i.price, 0);
+  const estimate = cheapest(total);
+
+  $('cartSummary').innerHTML = `
+    <div style="padding:18px">
+      <div class="muted">TOTAL V-BUCKS</div>
+      <div class="total">◈ ${format(total)}</div>
+      <br>
+      <div class="muted">ESTIMATED UK PACK COST</div>
+      <div class="total">£${estimate.gbp.toFixed(2)}</div>
+      <p class="muted">
+        ${estimate.packs.length
+          ? estimate.packs.map(format).join(' + ') +
+            ' V-Bucks packs · ' +
+            format(estimate.v - total) + ' V-Bucks left over'
+          : 'No packs needed'}
+      </p>
+    </div>
+  `;
+}
+
+$('cartItems').onclick = e => {
+  const b = e.target.closest('[data-remove]');
+
+  if (b) {
+    cart.splice(Number(b.dataset.remove), 1);
+    save();
+    showCart();
+  }
+};
+
+$('cartButton').onclick = showCart;
+$('cartClose').onclick = () => $('cart').classList.remove('open');
+$('clearCart').onclick = () => {
+  cart = [];
+  save();
+  showCart();
+};
+
+save();
+
+function show(i) {
+  if (!i) return;
+
+  $('modalTitle').textContent = i.name || 'Cosmetic';
+  $('modal').classList.add('open');
+
+  const exp = getExpiry(i);
+  const history = i.shopHistory || i.history || null;
+
+  let historyHtml =
+    '<span class="muted">Previous shop appearance requires historical data access; not verified for this item.</span>';
+
+  if (Array.isArray(history) && history.length) {
+    const dates = history.map(date).filter(Boolean).sort((a, b) => b - a);
+
+    const previous = dates.find(d =>
+      d.toISOString().slice(0, 10) !==
+      new Date().toISOString().slice(0, 10)
+    );
+
+    if (previous) historyHtml = esc(iso(previous));
+  }
+
+  const video = i.media?.video || i.video || null;
+  const url = typeof video === 'string'
+    ? video
+    : video?.url || video?.mp4 || null;
+
+  const isSafe = url && /^https:\/\//i.test(url);
+
+  $('modalContent').innerHTML = `
+    <p class="muted">
+      ${esc(type(i))} · ${esc(i.rarity?.name || '')}
+      · ◈ ${format(cost(i))} V-Bucks
+    </p>
+
+    <img src="${esc(img(i))}" alt="${esc(i.name)}">
+
+    <p><strong>Leaves:</strong>
+      ${exp ? esc(iso(exp)) : 'No confirmed leave time'}
+    </p>
+
+    <p><strong>Time remaining:</strong>
+      <span id="modalTimer">${exp ? time(exp) : 'Unknown'}</span>
+    </p>
+
+    <p><strong>Previously seen:</strong> ${historyHtml}</p>
+
+    <div id="preview">
+      <p class="muted">Checking for an actual Fortnite cosmetic preview video…</p>
+    </div>
+
+    <button class="pill" id="modalAdd">+ Add to cart</button>
+  `;
+
+  $('modalAdd').onclick = () => add(i);
+
+  if (isSafe) {
+    videoElement(url);
+  } else {
+    fetchPreview(i);
+  }
+
+  if (exp) {
+    const timer = setInterval(() => {
+      if (!$('modal').classList.contains('open')) {
+        clearInterval(timer);
+        return;
+      }
+
+      const el = $('modalTimer');
+      if (el) el.textContent = time(exp);
+    }, 1000);
+  }
+}
+
+function videoElement(url) {
+  const v = document.createElement('video');
+  v.controls = true;
+  v.playsInline = true;
+  v.preload = 'metadata';
+  v.src = url;
+  v.autoplay = false;
+  v.setAttribute('aria-label', 'Fortnite cosmetic preview with sound controls');
+
+  $('preview').replaceChildren(v);
+
+  const p = document.createElement('p');
+  p.className = 'muted';
+  p.textContent =
+    'Tap Play to watch with sound. Playback depends on the source providing playable media.';
+
+  $('preview').append(p);
+}
+
+async function fetchPreview(i) {
+  const id = i.id;
+
+  if (!id || !/^[a-z0-9_\-]+$/i.test(String(id))) {
+    $('preview').innerHTML =
+      '<p class="muted">No verified in-game animation video is available for this cosmetic.</p>';
+    return;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 7000);
+
+    const r = await fetch(
+      'https://prod.fn-api.cc/v1/cosmetics/all/' + encodeURIComponent(id),
+      {signal:controller.signal}
+    );
+
+    clearTimeout(timeout);
+
+    if (!r.ok) throw Error('Media unavailable');
+
+    const raw = await r.json();
+    const data = raw.data || raw;
+    const media = data.media;
+
+    const candidates = [
+      media?.video?.url,
+      media?.video,
+      media?.url,
+      media?.mp4,
+      media?.preview?.url,
+      media?.preview,
+      media?.videos?.[0]?.url
+    ].filter(x =>
+      typeof x === 'string' && /^https:\/\//i.test(x)
+    );
+
+    if (candidates.length) {
+      videoElement(candidates[0]);
+    } else {
+      $('preview').innerHTML =
+        '<p class="muted">No playable in-game emote animation with sound is available from this provider. A real 3D Fortnite emote player requires licensed animation assets and a compatible renderer.</p>';
+    }
+  } catch {
+    $('preview').innerHTML =
+      '<p class="muted">An in-game emote preview could not be loaded. The media provider may be unavailable or restrict browser access.</p>';
+  }
+}
+
+function closeModal() {
+  $('modal').classList.remove('open');
+  $('preview').querySelector('video')?.pause();
+}
+
+$('modalClose').onclick = closeModal;
+
+$('modal').onclick = e => {
+  if (e.target === $('modal')) closeModal();
+};
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+    $('cart').classList.remove('open');
+  }
+});
+
+load();
+</script>
 </body>
 </html>
